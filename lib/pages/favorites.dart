@@ -36,14 +36,14 @@ class _FavoritesState extends State<Favorites> {
       version: 1,
     );
 
-    getMechanism().then((value) {
+    getItems().then((value) {
       setState(() {
         items = value;
       });
     });
   }
 
-  Future<List<TestItems>> getMechanism() async {
+  Future<List<TestItems>> getItems() async {
     final Database db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query('person');
@@ -63,16 +63,6 @@ class _FavoritesState extends State<Favorites> {
       whereArgs: [id],
     );
   }
-
-  // Future<void> updateDB(Mechanism person) async {
-  //   final db = await database;
-
-  //   await db.update(
-  //     'person',
-  //     where: "id = ?",
-  //     whereArgs: [person.id],
-  //   );
-  // }
 
   @override
   void initState() {
@@ -106,7 +96,7 @@ class _FavoritesState extends State<Favorites> {
                 icon: const Icon(Icons.delete_forever_rounded),
                 onPressed: () {
                   deleteDB(item.id).then((value) {
-                    getMechanism().then((value) {
+                    getItems().then((value) {
                       setState(() {
                         items = value;
                       });
