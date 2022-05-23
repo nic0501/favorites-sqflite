@@ -61,6 +61,13 @@ class _ItemDtlState extends State<ItemDtl> {
     );
   }
 
+  Future<List<TestItems>> readAllEntry() async {
+    final db = await database;
+    final result = await db.query('person_database');
+
+    return result.TestItems.toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
